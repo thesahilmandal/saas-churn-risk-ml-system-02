@@ -9,6 +9,9 @@ import pyarrow.parquet as pq
 
 from typing import Any, Dict
 
+from src.cloud.s3_syncer import S3Sync
+from src.constants.pipeline_constants import S3_TRAINING_BUCKET_NAME
+
 from src.exception import CustomerChurnException
 from src.logging import logging
 
@@ -327,3 +330,16 @@ def parquet_to_csv(
 
     except Exception as e:
         raise CustomerChurnException(e, sys)
+
+
+def sync_to_s3(local_dir, s3_prefix) -> None:
+        s3_sync = S3Sync()
+        s3_path = (
+            f"s3://{S3_TRAINING_BUCKET_NAME}/"
+            f"{s3_prefix}"
+        ) 
+
+        s3_sync.sync_folder_to_s3(
+            folder=local_dir,
+            aws_bucket_url=s3_path
+        ) 

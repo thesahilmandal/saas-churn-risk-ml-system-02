@@ -35,7 +35,11 @@ from src.pipeline.training_pipeline import TrainingPipeline
 from src.exception import CustomerChurnException
 from src.logging import logging
 from src.utils.main_utils import write_json_file
-from src.constants.pipeline_constants import LOCK_FILE_PATH
+from src.constants.pipeline_constants import (
+    LOCK_FILE_PATH, ARTIFACT_DIR, 
+    S3_ARTIFACT_DIR_NAME,
+)
+from src.utils.main_utils import sync_to_s3
 
 
 # ============================================================
@@ -203,6 +207,11 @@ class CustomerChurnOrchestrator:
                 )
 
             self.metadata_manager.finalize(metadata, "SUCCESS")
+
+            sync_to_s3(
+                local_dir=ARTIFACT_DIR,
+                s3_prefix=S3_ARTIFACT_DIR_NAME
+            )
 
         except Exception as e:
             logging.exception("[ORCHESTRATOR] Run failed")

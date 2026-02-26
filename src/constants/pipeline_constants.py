@@ -22,8 +22,11 @@ load_dotenv()
 # -------------------------------------------------------------------------
 
 TARGET_COLUMN: str = "Churn"
+LOGS_DIR: Path = Path("logs")
 ARTIFACT_DIR: Path = Path("artifacts")
-TRAINING_BUCKET_NAME: str = "saas-customer-churn-ml-01"
+S3_TRAINING_BUCKET_NAME: str = "saas-customer-churn-ml-02"
+S3_ARTIFACT_DIR_NAME: str = "artifacts"
+S3_MODEL_REGISTRY_DIR_NAME: str = "model_registry"
 RANDOM_STATE = 42
 REFERENCE_SCHEMA: Path = Path("data_schema") / "schema.yaml"
 PRODUCTION_MODEL_DIR: Path = Path("production_model")
