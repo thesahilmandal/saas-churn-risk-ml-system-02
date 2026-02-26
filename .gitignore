@@ -1,0 +1,144 @@
+############################################
+# Python core
+############################################
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+############################################
+# Virtual environments
+############################################
+venv/
+.env
+.env.*
+.venv/
+ENV/
+env/
+virtualenv/
+
+############################################
+# Package management / build artifacts
+############################################
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+wheelhouse/
+pip-log.txt
+
+############################################
+# Jupyter / notebooks
+############################################
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+############################################
+# ML experiment artifacts
+############################################
+mlruns/
+mlartifacts/
+wandb/
+tensorboard/
+tb_logs/
+lightning_logs/
+checkpoints/
+models/
+artifacts/
+outputs/
+predictions/
+
+############################################
+# Data directories (large or regenerated)
+############################################
+data/raw/
+data/interim/
+data/processed/
+data/external/
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.pkl
+*.joblib
+
+############################################
+# Logs & runtime files
+############################################
+logs/
+*.log
+*.out
+*.err
+*.pid
+
+############################################
+# Caches
+############################################
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+coverage/
+htmlcov/
+.tox/
+.nox/
+
+############################################
+# Test & coverage reports
+############################################
+.coverage
+coverage.xml
+pytest.xml
+
+############################################
+# IDE / Editor settings
+############################################
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+
+############################################
+# OS-specific
+############################################
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+############################################
+# Docker
+############################################
+docker-compose.override.yml
+*.pid
+
+############################################
+# Security / credentials
+############################################
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+aws_credentials/
+gcp_credentials/
+
+############################################
+# Project-specific exclusions
+############################################
+rough/
+project_folder.py
+main_0.py
+test_mongodb.py
+final_model/
+aws/
+awscliv2.zip
+model_registry/
+production_model/
+online/

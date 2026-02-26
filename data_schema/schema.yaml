@@ -1,0 +1,176 @@
+schema_version: v1.0.0
+schema_type: tabular
+schema_role: reference
+owner: ml-platform
+
+description: >
+  Reference schema for the Customer Churn dataset.
+  Enforced during data ingestion to detect data quality issues,
+  schema drift, and breaking changes before training.
+
+
+enforcement_mode: strict  # strict | lenient
+
+dataset:
+  name: customer_churn
+  expected_record_level: customer
+  target_column: Churn
+  split_strategy: stratified
+
+dataset_constraints:
+  min_rows: 1000
+  max_missing_ratio: 0.05
+  expected_feature_count: 19
+  target_distribution:
+    allowed_range:
+      0: [0.60, 0.90]
+      1: [0.10, 0.40]
+
+ingestion_rules:
+  allow_type_coercion: true
+  drop_unknown_columns: false
+  case_sensitive_values: true
+
+dtype_mapping:
+  string: ["object", "string"]
+  integer: ["int64", "int32"]
+  floating: ["float64", "float32"]
+
+columns:
+
+  gender:
+    expected_dtype: string
+    required: true
+    nullable: false
+    allowed_values: ["Male", "Female"]
+    allow_new_categories: false
+    severity: warning
+
+  SeniorCitizen:
+    expected_dtype: string
+    required: true
+    nullable: false
+    allowed_values: ["Yes", "No"]
+    allow_new_categories: false
+    severity: error
+
+  Partner:
+    expected_dtype: string
+    required: true
+    nullable: false
+    allowed_values: ["Yes", "No"]
+    severity: warning
+
+  Dependents:
+    expected_dtype: string
+    required: true
+    nullable: false
+    allowed_values: ["Yes", "No"]
+    severity: warning
+
+  tenure:
+    expected_dtype: integer
+    required: true
+    nullable: false
+    min: 0
+    max: 100
+    severity: error
+
+  PhoneService:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No"]
+    severity: warning
+
+  MultipleLines:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No phone service"]
+    severity: warning
+
+  InternetService:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["DSL", "Fiber optic", "No"]
+    severity: warning
+
+  OnlineSecurity:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  OnlineBackup:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  DeviceProtection:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  TechSupport:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  StreamingTV:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  StreamingMovies:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No", "No internet service"]
+    severity: warning
+
+  Contract:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Month-to-month", "One year", "Two year"]
+    severity: warning
+
+  PaperlessBilling:
+    expected_dtype: string
+    nullable: false
+    allowed_values: ["Yes", "No"]
+    severity: warning
+
+  PaymentMethod:
+    expected_dtype: string
+    nullable: false
+    allowed_values:
+      - "Electronic check"
+      - "Mailed check"
+      - "Bank transfer (automatic)"
+      - "Credit card (automatic)"
+    allow_new_categories: false
+    severity: warning
+
+  MonthlyCharges:
+    expected_dtype: floating
+    nullable: false
+    min: 0.0
+    max: 200.0
+    severity: error
+
+  TotalCharges:
+    expected_dtype: floating
+    nullable: true
+    min: 0.0
+    coercible: true
+    raw_dtype_allowed: ["string"]
+    severity: warning
+
+  Churn:
+    expected_dtype: integer
+    nullable: false
+    allowed_values: [0, 1]
+    role: target
+    severity: error
